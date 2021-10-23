@@ -78,7 +78,7 @@ class User
 
     static function fromHash($hash){
         $usr = new User(null);
-        return new User($usr->hashId($hash_));
+        return new User($usr->hashId($hash));
     }
 }
 
