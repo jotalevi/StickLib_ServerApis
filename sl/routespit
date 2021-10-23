@@ -1,0 +1,10 @@
+<?php
+error_reporting(0);
+include_once "autoload.php";
+
+foreach (Router::$routes_get as $route)
+    print_r ($route['path'] . " -> " . $route['callback'] . "\n");
+
+
+foreach (Router::$routes_post as $route)
+    print_r ($route['path'] . " -> " . $route['callback'] . "\n");
