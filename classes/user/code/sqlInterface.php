@@ -32,7 +32,7 @@ class User_SqlInterface{
     }
 
     public function UserIdExists($id){
-        $result = mysqli_query($this->conn, "SELECT * FROM Users WHERE object_id LIKE $id");
+        $result = mysqli_query($this->conn, "SELECT * FROM Users WHERE userid LIKE $id");
         return mysqli_num_rows($result) > 0;
     }
 

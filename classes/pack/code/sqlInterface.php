@@ -33,7 +33,7 @@ class Pack_SqlInterface{
     }
 
     public function PackIdExists($id){
-        $result = mysqli_query($this->conn, "SELECT * FROM Packs WHERE object_id LIKE $id");
+        $result = mysqli_query($this->conn, "SELECT * FROM Packs WHERE packid LIKE $id");
         return mysqli_num_rows($result) > 0;
     }
 

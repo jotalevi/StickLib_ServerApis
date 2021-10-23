@@ -57,7 +57,6 @@ class User
 
     static function newFromJson($stdObj){
         $usr = new User(null);
-        $usr->userId = $stdObj['userid'] ?? 0;
         $usr->userMail = $stdObj['usermail'] ?? '';
         $usr->userName = $stdObj['username'] ?? '';
         $usr->passHash = hash('sha256', $jsonData['username'] . $jsonData['password']) ?? '';
