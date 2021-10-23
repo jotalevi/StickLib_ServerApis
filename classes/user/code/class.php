@@ -148,7 +148,7 @@ function userPassChange_route($id){
 }
 
 Router::routeRegPathSimple('/user/new', Router::$POST, userNew_route);
-Router::routeRegPathSimple('/user/login', Router::$GET, userLogin_route);
+Router::routeRegPathSimple('/user/login', Router::$POST, userLogin_route);
 Router::routeRegPathLast('/user/get/{id}', Router::$GET, userGetId_route);
 Router::routeRegPathLast('/user/update/{id}', Router::$POST, userUpdateId_route);
 Router::routeRegPathLast('/user/change_password/{id}', Router::$POST, userPassChange_route);
