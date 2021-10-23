@@ -78,7 +78,8 @@ class User
 
     static function fromHash($hash){
         $usr = new User(null);
-        return new User($usr->hashId($hash));
+        $id = $usr->hashId($hash);
+        return ($id == null) ? null : new User($id);
     }
 }
 
@@ -91,7 +92,15 @@ function userLogin_route(){
     $jsonData = json_decode(file_get_contents('php://input'), true);
     
     $usr = User::fromHash(hash('sha256', $jsonData['username'] . $jsonData['password']));
-    if ($usr->userId != 0){
+
+    return array(
+        'serverhash' => hash('sha256', $jsonData['username'] . $jsonData['password']),
+        'usr' => json_encode($usr),
+        'username' => $jsonData['username'],
+        'password' => $jsonData['password']
+    );
+
+    if ($usr != null){
         return $usr->getObjectJson();
     }
 
