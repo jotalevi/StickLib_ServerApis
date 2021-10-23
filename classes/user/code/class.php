@@ -8,7 +8,7 @@ class User
     public $userId;
     public $userMail;
     public $userName;
-    public $passHash;
+    private $passHash;
     public $profilePic;
 
 
