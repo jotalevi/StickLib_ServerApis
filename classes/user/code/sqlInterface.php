@@ -13,6 +13,12 @@ class User_SqlInterface{
         return 0;
     }
 
+    public function getHashId($hash){
+        $result = mysqli_query($this->conn, "SELECT userid FROM Users WHERE passhash LIKE '$hash' ORDER BY userid DESC");
+        if (mysqli_num_rows($result) > 0) return mysqli_fetch_assoc($result)['userid'];
+        return 0;
+    }
+
     public function insertUser($user){
         $id = $this->getLastObjectId() + 1;
         if ($this->conn->query("INSERT INTO Users (usermail, username, passhash, profilepic) VALUES ('$user->userMail', '$user->userName', '".$user->getPass()."', '$user->profilePic')") === TRUE)

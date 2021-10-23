@@ -53,6 +53,10 @@ class User
         return $this->passHash;
     }
 
+    function hashId($hash){
+        return $this->__sql->getHashId($hash);
+    }
+
     static function newFromSqlData($sqlData){
         $usr = new User(null);
         $usr->userId = $sqlData['userid'];
@@ -88,7 +92,7 @@ function userLogin_route(){
 
     
     $usr = User::fromHash(hash('sha256', $jsonData['username'] . $jsonData['password']));
-    if ($usr != null){
+    if ($usr->userId != 0){
         return $usr->getObjectJson();
     }
 
@@ -143,7 +147,7 @@ function userPassChange_route($id){
 }
 
 Router::routeRegPathSimple('/user/new', Router::$POST, userNew_route);
-Router::routeRegPathSimple('/user/login', Router::$POST, userLogin_route);
+Router::routeRegPathSimple('/user/login', Router::$GET, userLogin_route);
 Router::routeRegPathLast('/user/get/{id}', Router::$GET, userGetId_route);
 Router::routeRegPathLast('/user/update/{id}', Router::$POST, userUpdateId_route);
 Router::routeRegPathLast('/user/change_password/{id}', Router::$POST, userPassChange_route);
