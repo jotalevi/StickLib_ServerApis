@@ -3,7 +3,6 @@
 Class Core
 {
     
-    private $db;
     public $get;
     public $post;
     public static $tcClasses = [];
@@ -12,8 +11,6 @@ Class Core
     {
         $this->get = $_GET;
         $this->post = $_POST;
-
-        $this->db = new DBInteractor();
     }
 }
 
@@ -31,7 +28,7 @@ function dotInfo_route(){
     return ("
         {\"data\":{
             \"status\": \"200\",
-            \"message\": \"toneCore ALFA V0.2\"
+            \"message\": \"SL(tonecore) ALFA V0.51\"
         }}
     ");
 }

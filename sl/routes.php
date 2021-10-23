@@ -21,7 +21,7 @@ class Router{
         }
 
         if ($method == Router::$GET ? isset(Router::$routes_get[$path]) : isset(Router::$routes_post[$path])){
-            EXCEPTOR::die('This method is already registered', '/tone/routes.php:routeRegPathSimple', 'The following calback path or method is already registered \'' . $method . ':' . $path . '\'');
+            EXCEPTOR::die('This method is already registered', '/sl/routes.php:routeRegPathSimple', 'The following calback path or method is already registered \'' . $method . ':' . $path . '\'');
             return;
         }
 
@@ -42,7 +42,7 @@ class Router{
         }
 
         if ($method == Router::$GET ? isset(Router::$routes_get[$path]) : isset(Router::$routes_post[$path])){
-            EXCEPTOR::die('This method is already registered', '/tone/routes.php:routeRegPathLast', 'The following calback path or method is already registered \'' . $method . ':' . $path . '\'');
+            EXCEPTOR::die('This method is already registered', '/sl/routes.php:routeRegPathLast', 'The following calback path or method is already registered \'' . $method . ':' . $path . '\'');
             return;
         }
 
@@ -95,7 +95,7 @@ class Router{
             throw new Exception('err');
 
         }catch(Exception $e){
-            EXCEPTOR::die('Error on callback for this path or method', '/tone/routes.php::24', 'The following callback path or method is not registered \'' . $method . ':' . $path . '\'');
+            EXCEPTOR::die('Error on callback for this path or method', '/sl/routes.php::24', 'The following callback path or method is not registered \'' . $method . ':' . $path . '\'');
         }
     }
 }
