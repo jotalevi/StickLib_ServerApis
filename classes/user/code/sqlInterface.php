@@ -21,7 +21,7 @@ class User_SqlInterface{
 
     public function insertUser($user){
         $id = $this->getLastObjectId() + 1;
-        if ($this->conn->query("INSERT INTO Users (usermail, username, passhash, profilepic) VALUES ('$user->userMail', '$user->userName', '".$user->getPass()."', '$user->profilePic')") === TRUE)
+        if ($this->conn->query("INSERT INTO Users (usermail, username, passhash, profilepic) VALUES ('$user->userMail', '$user->userName', '".$user->passHash."', '$user->profilePic')") === TRUE)
             return $id;
         
         EXCEPTOR::die('Invalid User Insert', '/classes/user/code/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');

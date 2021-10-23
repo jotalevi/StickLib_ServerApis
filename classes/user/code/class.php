@@ -8,7 +8,7 @@ class User
     public $userId;
     public $userMail;
     public $userName;
-    private $passHash;
+    public $passHash;
     public $profilePic;
 
 
@@ -27,7 +27,7 @@ class User
         if ($user == null) EXCEPTOR::rDie("{\"data\":{\"message\": \"the query user does not exists\"}}");
         $this->userMail = $user['usermail'];
         $this->userName = $user['username'];
-        $this->setPass = $user['passhash'];
+        $this->passHash = $user['passhash'];
         $this->profilePic = $user['profilepic'];
     }
     
@@ -42,15 +42,9 @@ class User
     }
 
     function getObjectJson(){
-        return json_encode($this);
-    }
-
-    function setPass($hash){
-        $this->passHash = $hash;
-    }
-
-    function getPass(){
-        return $this->passHash;
+        $handle = $this;
+        unset($handle->passHash);
+        return json_encode($handle);
     }
 
     function hashId($hash){
@@ -62,7 +56,7 @@ class User
         $usr->userId = $sqlData['userid'];
         $usr->userMail = $sqlData['usermail'];
         $usr->userName = $sqlData['username'];
-        $usr->setPass($sqlData['passhash']);
+        $usr->passHash = $sqlData['passhash'];
         $usr->profilePic = $sqlData['profilepic'];
         return $usr;
     }
@@ -71,7 +65,7 @@ class User
         $usr = new User(null);
         $usr->userMail = $stdObj['usermail'] ?? '';
         $usr->userName = $stdObj['username'] ?? '';
-        $usr->setPass(hash('sha256', $jsonData['username'] . $jsonData['password']));
+        $usr->passHash = hash('sha256', $stdObj['username'] . $stdObj['password']);
         $usr->profilePic = $stdObj['profilepic'] ?? '';
         return $usr;
     }
@@ -120,7 +114,7 @@ function userUpdateId_route($id){
     $usr = new User($id);
     $jsonData = json_decode(file_get_contents('php://input'), true);
 
-    if ($usr->getPass() == hash('sha256', $jsonData['username'] . $jsonData['password'])){
+    if ($usr->passHash == hash('sha256', $jsonData['username'] . $jsonData['password'])){
         ($usr->applyJson(json_decode(file_get_contents('php://input'), true)))->commit();
         return $usr->getObjectJson();
     }
@@ -140,8 +134,8 @@ function userPassChange_route($id){
     $oldPw = hash('sha256', $jsonData['username'] . $jsonData['password']);
     $newPw = hash('sha256', $jsonData['username'] . $jsonData['new_password']);
 
-    if ($user->getPass() == $oldPw){
-        $usr->setPass($newPw);
+    if ($user->passHash == $oldPw){
+        $usr->passHash = $newPw;
         $usr->commit();
         return $usr->getObjectJson();
     }
