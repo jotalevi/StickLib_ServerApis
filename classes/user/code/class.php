@@ -90,10 +90,7 @@ function userNew_route(){
 function userLogin_route(){
     $jsonData = json_decode(file_get_contents('php://input'), true);
 
-    return array(
-        'username'=>$jsonData['username'],
-        'password'=>$jsonData['password']
-    );
+    return json_encode($jsonData);
     
     $usr = User::fromHash(hash('sha256', $jsonData['username'] . $jsonData['password']));
     if ($usr->userId != 0){
