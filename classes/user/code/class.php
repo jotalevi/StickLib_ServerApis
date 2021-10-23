@@ -112,7 +112,7 @@ function userUpdateId_route($id){
     $usr = new User($id);
     $jsonData = json_decode(file_get_contents('php://input'), true);
 
-    if ($user->getPass() == hash('sha256', $jsonData['username'] . $jsonData['password'])){
+    if ($usr->getPass() == hash('sha256', $jsonData['username'] . $jsonData['password'])){
         ($usr->applyJson(json_decode(file_get_contents('php://input'), true)))->commit();
         return $usr->getObjectJson();
     }
