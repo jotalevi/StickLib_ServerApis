@@ -21,6 +21,15 @@ class User_SqlInterface{
         EXCEPTOR::die('Invalid User Insert', '/classes/user/code/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');
     }
 
+    public function updateUser($user){
+        if (!$this->UserIdExists($user->userId)) return $this->insertUser($user);
+
+        if (mysqli_query($this->conn, "UPDATE Users SET username='$user->userName', profilepic='$user->profilePic' WHERE userid LIKE $id"))
+            return $id;
+
+        EXCEPTOR::die('Invalid Product Update', '/classes/product/code/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');
+    }
+
     public function getUser($id){
         if (!$this->UserIdExists($id)) return null;
 
