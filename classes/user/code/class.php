@@ -71,7 +71,7 @@ class User
         $usr = new User(null);
         $usr->userMail = $stdObj['usermail'] ?? '';
         $usr->userName = $stdObj['username'] ?? '';
-        $usr->setPass(hash('sha256', $jsonData['username'] . $jsonData['password']) ?? '');
+        $usr->setPass(hash('sha256', $jsonData['username'] . $jsonData['password']));
         $usr->profilePic = $stdObj['profilepic'] ?? '';
         return $usr;
     }
