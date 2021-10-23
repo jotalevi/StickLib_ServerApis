@@ -8,8 +8,8 @@ class User_SqlInterface{
     }
 
     public function getLastObjectId(){
-        $result = mysqli_query($this->conn, "SELECT object_id FROM Users ORDER BY object_id DESC");
-        if (mysqli_num_rows($result) > 0) return mysqli_fetch_assoc($result)['object_id'];
+        $result = mysqli_query($this->conn, "SELECT userid FROM Users ORDER BY userid DESC");
+        if (mysqli_num_rows($result) > 0) return mysqli_fetch_assoc($result)['userid'];
         return 0;
     }
 
