@@ -78,7 +78,7 @@ function uploadImgFile($id, $packFolder){
     $file_name = $_FILES['image_file' . $id]['name'];   
     $temp_file_location = $_FILES['image_file' . $id]['tmp_name'];
     $file_type = $_FILES['image_file' . $id]['type'];
-    $ext = end((explode(".", $file_name)));
+    $ext = end(explode(".", $file_name));
 
     $s3 = new Aws\S3\S3Client([
         'region'  => Config::$aws_access_api_rg,
