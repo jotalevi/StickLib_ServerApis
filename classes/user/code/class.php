@@ -143,19 +143,6 @@ function userPassChange_route($id){
     $oldPw = hash('sha256', $jsonData['username'] . $jsonData['password']);
     $newPw = hash('sha256', $jsonData['username'] . $jsonData['new_password']);
 
-    return json_encode(
-        array(
-            'new hash' => $newPw,
-            'old hash' => $oldPw,
-            'usr hash' => $usr->passHash,
-            'new pass' => $jsonData['new_password'],
-            'credentials' => array(
-                'username' => $jsonData['username'],
-                'password' => $jsonData['password']
-            )
-        )
-    );
-
     if ($usr->passHash == $oldPw){
         $usr->passHash = $newPw;
         $usr->commit();
