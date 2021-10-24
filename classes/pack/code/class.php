@@ -121,9 +121,11 @@ function packNew_route(){
 function packGetLatest_route($lim=10){
     $handle = new Pack(null);
 
-    return array(
-        'limit' => $lim,
-        'result' => $handle->getLatest($lim)
+    return json_encode(
+        array(
+            'limit' => $lim,
+            'result' => $handle->getLatest($lim)
+        )
     );
 }
 
