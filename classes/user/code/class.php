@@ -51,7 +51,7 @@ class User
         return $this->__sql->getHashId($hash);
     }
 
-    function dataUsable($uname, $umail)
+    function dataUsed($uname, $umail)
     {
         return ($this->__sql->cmail($umail) || $this->__sql->cname($uname));
     }
