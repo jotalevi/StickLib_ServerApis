@@ -32,7 +32,7 @@ class User
     }
     
     function applyJson($stdObj){
-        $this->userName = $stdObj['username'] ?? $this->userName;
+        $this->userName = $stdObj['nusername'] ?? $this->userName;
         $this->profilePic = $stdObj['profilepic'] ?? $this->profilePic;
     }
     
