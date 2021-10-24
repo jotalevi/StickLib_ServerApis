@@ -87,6 +87,7 @@ function userNew_route(){
     $jsonData = json_decode(file_get_contents('php://input'), true);
     if (!(new User(null))->dataUsed($jsonData['username'], $jsonData['usermail'])){
         $usr = User::newFromJson($jsonData)->commit();
+	$usr->userId = strval($usr->userId);
         return $usr->getObjectJson();
     }
     return json_encode(
