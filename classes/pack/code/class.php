@@ -30,7 +30,7 @@ class Pack
         $this->packName = $pack['packname'];
         $this->packImgCount = $pack['packimgcount'];
         $this->packIdentifier = $pack['packidentifier'];
-        $this->packInteractionsCounter = $pack['packinteractionscounter'];
+        $this->packInteractionsCounter = $pack['packinteractionscounter'] ?? 0;
     }
     
     function commit(){
