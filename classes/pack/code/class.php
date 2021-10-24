@@ -120,7 +120,7 @@ function packGetId_route($id){
 
 function packIncrementInteraction_route($id){
     $pack = new Pack($id);
-    $pack->packInteractionsCounter += 1;
+    $pack->packInteractionsCounter = strval($pack->packInteractionsCounter + 1);
     $pack->commit();
     return $pack->getObjectJson();
 }
