@@ -32,7 +32,7 @@ class Pack
     }
     
     function commit(){
-        $this->__sql->updatePack($this);
+        $this->__sql->insertPack($this);
         return $this;
     }
 
@@ -57,6 +57,17 @@ class Pack
         $pack->packAuthor = $stdObj['packauthor'];
         $pack->packName = $stdObj['packname'];
         $pack->packImgCount = $stdObj['packimgcount'];
+        $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAutho))->userName;
+        
+        return $pack;
+    }
+
+    static function newFromPostInfo(){
+        $pack = new Pack(null);
+
+        $pack->packAuthor = $_POST['packauthor'];
+        $pack->packName = $_POST['packname'];
+        $pack->packImgCount = $_POST['packimgcount'];
         $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAutho))->userName;
         
         return $pack;
@@ -87,7 +98,8 @@ function uploadImgFile($id, $packFolder){
 }
 
 function packNew_route(){
-    $pack = Pack::newFromJson(json_decode(file_get_contents('php://input'), true))->commit();
+
+    $pack = Pack::newFromPostInfo(json_decode(file_get_contents('php://input'), true))->commit();
 
     for ($i = 0; $i < $pack->packImgCount; $i+= 1){
         uploadImgFile($i, $pack->packIdentifier);

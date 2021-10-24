@@ -46,7 +46,7 @@ class User_SqlInterface{
         if (mysqli_query($this->conn, "UPDATE Users SET username='$user->userName', profilepic='$user->profilePic', passhash='$user->passHash' WHERE userid LIKE $user->userId"))
             return $id;
 
-        EXCEPTOR::die('Invalid Product Update', '/classes/product/code/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');
+        EXCEPTOR::die('Invalid User Update', '/classes/user/code/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');
     }
 
     public function getUser($id){
