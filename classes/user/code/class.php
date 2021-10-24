@@ -147,7 +147,7 @@ function userPassChange_route($id){
         array(
             'new hash' => $newPw,
             'old hash' => $oldPw,
-            'usr hash' => $user->passHash,
+            'usr hash' => $usr->passHash,
             'new pass' => $jsonData['new_password'],
             'credentials' => array(
                 'username' => $jsonData['username'],
@@ -156,7 +156,7 @@ function userPassChange_route($id){
         )
     );
 
-    if ($user->passHash == $oldPw){
+    if ($usr->passHash == $oldPw){
         $usr->passHash = $newPw;
         $usr->commit();
         return $usr->getObjectJson();
