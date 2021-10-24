@@ -7,6 +7,19 @@ class User_SqlInterface{
         if (!$this->conn) EXCEPTOR::die('No conection to database', '/classes/user/code/sqlInterface.php', 'Sl couldn\'t connect to the sql server.');
     }
 
+    public function cname($name){
+        $result = mysqli_query($this->conn, "SELECT userid FROM Users WHERE username LIKE '$name' ORDER BY userid DESC");
+        if (mysqli_num_rows($result) > 0) return true;
+        return false;
+    }
+
+    public function cmail($mail){
+        $result = mysqli_query($this->conn, "SELECT userid FROM Users WHERE usermail LIKE '$mail' ORDER BY userid DESC");
+        if (mysqli_num_rows($result) > 0) return true;
+        return false;
+    }
+
+
     public function getLastObjectId(){
         $result = mysqli_query($this->conn, "SELECT userid FROM Users ORDER BY userid DESC");
         if (mysqli_num_rows($result) > 0) return mysqli_fetch_assoc($result)['userid'];

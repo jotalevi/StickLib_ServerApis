@@ -51,6 +51,11 @@ class User
         return $this->__sql->getHashId($hash);
     }
 
+    function dataUsable($uname, $umail)
+    {
+        return ($this->__sql->cmail($umail) || $this->__sql->cname($uname));
+    }
+
     static function newFromSqlData($sqlData){
         $usr = new User(null);
         $usr->userId = $sqlData['userid'];
@@ -78,8 +83,16 @@ class User
 }
 
 function userNew_route(){
-    $usr = User::newFromJson(json_decode(file_get_contents('php://input'), true))->commit();
-    return $usr->getObjectJson();
+    if (!(new User(null))->dataUsed()){
+        $usr = User::newFromJson(json_decode(file_get_contents('php://input'), true))->commit();
+        return $usr->getObjectJson();
+    }
+    return json_encode(
+        array(
+            'status' => '200',
+            'message' => 'Username or Email is already on use'
+        )
+    ); 
 }
 
 function userLogin_route(){
