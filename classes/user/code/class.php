@@ -101,13 +101,6 @@ function userLogin_route(){
     
     $usr = User::fromHash(hash('sha256', $jsonData['username'] . $jsonData['password']));
 
-    return array(
-        'serverhash' => hash('sha256', $jsonData['username'] . $jsonData['password']),
-        'usr' => json_encode($usr),
-        'username' => $jsonData['username'],
-        'password' => $jsonData['password']
-    );
-
     if ($usr != null){
         return $usr->getObjectJson();
     }
