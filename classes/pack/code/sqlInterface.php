@@ -8,8 +8,8 @@ class Pack_SqlInterface{
     }
 
     public function getLastObjectId(){
-        $result = mysqli_query($this->conn, "SELECT object_id FROM Packs ORDER BY object_id DESC");
-        if (mysqli_num_rows($result) > 0) return mysqli_fetch_assoc($result)['object_id'];
+        $result = mysqli_query($this->conn, "SELECT packid FROM Packs ORDER BY packid DESC");
+        if (mysqli_num_rows($result) > 0) return mysqli_fetch_assoc($result)['packid'];
         return 0;
     }
 
