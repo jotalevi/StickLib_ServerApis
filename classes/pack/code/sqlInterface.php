@@ -16,7 +16,7 @@ class Pack_SqlInterface{
     public function insertPack($pack){
         $id = $this->getLastObjectId() + 1;
 
-        if ($this->conn->query("INSERT INTO Packs (packauthor, packidentifier, packname, packimgcount) VALUES ('$pack->packAuthor', '$pack->packIdentifier', '$pack->packName', '$pack->packImgCount')") === TRUE)
+        if ($this->conn->query("INSERT INTO Packs (packauthor, packidentifier, packname, packimgcount, packinteractionscounter) VALUES ('$pack->packAuthor', '$pack->packIdentifier', '$pack->packName', '$pack->packImgCount', '$pack->packInteractionsCounter')") === TRUE)
             return $id;
         
         EXCEPTOR::die('Invalid Pack Insert', '/classes/pack/code/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');

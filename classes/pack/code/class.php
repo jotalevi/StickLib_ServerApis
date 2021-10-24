@@ -10,6 +10,7 @@ class Pack
     public $packIdentifier;
     public $packName;
     public $packImgCount;
+    public $packInteractionsCounter;
 
     function __construct($id)
     {
@@ -29,6 +30,7 @@ class Pack
         $this->packName = $pack['packname'];
         $this->packImgCount = $pack['packimgcount'];
         $this->packIdentifier = $pack['packidentifier'];
+        $this->packInteractionsCounter = $pack['packinteractionscounter'];
     }
     
     function commit(){
@@ -47,6 +49,7 @@ class Pack
         $pack->packName = $sqlData['packname'];
         $pack->packImgCount = $sqlData['packimgcount'];
         $pack->packIdentifier = $sqlData['packidentifier'];
+        $pack->packInteractionsCounter = $sqlData['packinteractionscounter'];
         
         return $pack;
     }
@@ -58,6 +61,7 @@ class Pack
         $pack->packName = $stdObj['packname'];
         $pack->packImgCount = $stdObj['packimgcount'];
         $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAutho))->userName;
+        $pack->packInteractionsCounter = 0;
         
         return $pack;
     }
@@ -69,6 +73,7 @@ class Pack
         $pack->packName = $_POST['packname'];
         $pack->packImgCount = $_POST['packimgcount'];
         $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAuthor))->userName;
+        $pack->packInteractionsCounter = 0;
         
         return $pack;
     }
@@ -98,7 +103,6 @@ function uploadImgFile($id, $packFolder){
 }
 
 function packNew_route(){
-
     $pack = Pack::newFromPostInfo(json_decode(file_get_contents('php://input'), true))->commit();
 
     for ($i = 0; $i < $pack->packImgCount; $i+= 1){
@@ -114,5 +118,13 @@ function packGetId_route($id){
     return (new Pack($id))->getObjectJson();
 }
 
+function packIncrementInteraction_route($id){
+    $pack = new Pack($id);
+    $pack->packInteractionsCounter += 1;
+    $pack->commit();
+    return $pack->getObjectJson();
+}
+
 Router::routeRegPathSimple('/pack/new', Router::$POST, packNew_route);
 Router::routeRegPathLast('/pack/get/{id}', Router::$GET, packGetId_route);
+Router::routeRegPathLast('/pack/incrementcounter/{id}', Router::$GET, packIncrementInteraction_route);
