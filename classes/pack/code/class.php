@@ -48,7 +48,8 @@ class Pack
 
     static function newFromSqlData($sqlData){
         $pack = new Pack(null);
-
+        
+        $pack->packId = $sqlData['packid'];
         $pack->packAuthor = $sqlData['packauthor'];
         $pack->packName = $sqlData['packname'];
         $pack->packImgCount = $sqlData['packimgcount'];
