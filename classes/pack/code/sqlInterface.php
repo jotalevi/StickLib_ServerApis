@@ -31,6 +31,18 @@ class Pack_SqlInterface{
         EXCEPTOR::die('Invalid Pack Update', '/classes/user/pack/sqlInterface.php', 'Couldtn\'t commit these changes to Database.');
     }
 
+    public function getLatest($lim){
+        $result = mysqli_query($this->conn, "SELECT * FROM Packs ORDER BY packid DESC LIMIT $lim");
+
+        if (mysqli_num_rows($result) < 1) return null;
+        
+        $packList = [];
+        while ($row = mysqli_fetch_assoc($result)){
+            $packList[] = Pack::newFromSqlData($row);
+        }
+        return $packList;
+    }
+
     public function getPack($id){
         if (!$this->PackIdExists($id)) return null;
 

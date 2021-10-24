@@ -42,6 +42,10 @@ class Pack
         return json_encode($this);
     }
 
+    function getLatest($lim){
+        
+    }
+
     static function newFromSqlData($sqlData){
         $pack = new Pack(null);
 
@@ -114,6 +118,11 @@ function packNew_route(){
     return $pack->getObjectJson();
 }
 
+function packGetLatest_route($lim=10){
+    $handle = new Pack(null);
+    $latestPacks = $handle->getLatest($lim);
+}
+
 function packGetId_route($id){
     return (new Pack($id))->getObjectJson();
 }
@@ -126,5 +135,6 @@ function packIncrementInteraction_route($id){
 }
 
 Router::routeRegPathSimple('/pack/new', Router::$POST, packNew_route);
+Router::routeRegPathLast('/pack/latest/{limit}', Router::$GET, packGetLatest_route);
 Router::routeRegPathLast('/pack/get/{id}', Router::$GET, packGetId_route);
 Router::routeRegPathLast('/pack/incrementcounter/{id}', Router::$GET, packIncrementInteraction_route);
