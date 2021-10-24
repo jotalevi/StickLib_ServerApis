@@ -43,7 +43,7 @@ class Pack
     }
 
     function getLatest($lim){
-        
+        return $this->__sql->getLatest($lim);
     }
 
     static function newFromSqlData($sqlData){
@@ -120,7 +120,11 @@ function packNew_route(){
 
 function packGetLatest_route($lim=10){
     $handle = new Pack(null);
-    $latestPacks = $handle->getLatest($lim);
+
+    return array(
+        'limit' => $lim,
+        'result' => $handle->getLatest($lim)
+    );
 }
 
 function packGetId_route($id){
