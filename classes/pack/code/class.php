@@ -30,7 +30,7 @@ class Pack
         $this->packName = $pack['packname'];
         $this->packImgCount = $pack['packimgcount'];
         $this->packIdentifier = $pack['packidentifier'];
-        $this->packInteractionsCounter = $pack['packinteractionscounter'] ?? 0;
+        $this->packInteractionsCounter = strval($pack['packinteractionscounter'] ?? 0);
     }
     
     function commit(){
@@ -49,7 +49,7 @@ class Pack
         $pack->packName = $sqlData['packname'];
         $pack->packImgCount = $sqlData['packimgcount'];
         $pack->packIdentifier = $sqlData['packidentifier'];
-        $pack->packInteractionsCounter = $sqlData['packinteractionscounter'];
+        $pack->packInteractionsCounter = strval($sqlData['packinteractionscounter'] ?? 0);
         
         return $pack;
     }
@@ -61,7 +61,7 @@ class Pack
         $pack->packName = $stdObj['packname'];
         $pack->packImgCount = $stdObj['packimgcount'];
         $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAutho))->userName;
-        $pack->packInteractionsCounter = 0;
+        $pack->packInteractionsCounter = "0";
         
         return $pack;
     }
@@ -73,7 +73,7 @@ class Pack
         $pack->packName = $_POST['packname'];
         $pack->packImgCount = $_POST['packimgcount'];
         $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAuthor))->userName;
-        $pack->packInteractionsCounter = 0;
+        $pack->packInteractionsCounter = "0";
         
         return $pack;
     }
