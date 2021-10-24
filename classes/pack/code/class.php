@@ -34,7 +34,7 @@ class Pack
     }
     
     function commit(){
-        $this->__sql->insertPack($this);
+        $this->__sql->updatePack($this);
         return $this;
     }
 
