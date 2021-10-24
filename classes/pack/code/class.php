@@ -70,6 +70,8 @@ class Pack
         $pack->packImgCount = $_POST['packimgcount'];
         $pack->packIdentifier = $pack->packId . $pack->packAuthor . (new User($pack->packAutho))->userName;
         
+        return new User($pack->packAutho);
+        
         return $pack;
     }
 }
