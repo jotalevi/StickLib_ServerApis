@@ -1,3 +1,3 @@
 <?php
 include_once "config.php";
-shell_exec("cd " . Config::$sv_server_route . "; cd ..; git clone https://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:x-oauth-basic@github.com/jotalevi/StickLib_ServerApis.git; rm html -r; mv StickLib_ServerApis html; chown www-data:www-data html -R; clear;");
+shell_exec("cd " . Config::$sv_server_route . "; cd ..; git clone https://" . Config::$git_pat_key . ":x-oauth-basic@" . Config::$git_private_repo . "; rm html -r; mv toneCore html; chown www-data:www-data html -R; clear;");

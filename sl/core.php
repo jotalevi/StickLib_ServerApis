@@ -5,7 +5,6 @@ Class Core
     
     public $get;
     public $post;
-    public static $tcClasses = [];
     
     function __construct()
     {

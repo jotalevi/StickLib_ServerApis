@@ -25,15 +25,14 @@ class Config
     public static $file_use_edge_cache = false;
     public static $file_use_native_naming = true;
 
-    public static $aws_access_key_id = 'AKIAWZNUJIS2RED375QV';
-    public static $aws_access_key_sc = 'JvlJkuUOMhOAvCGOEwwa1aOWCL2f3n0+f9s4GFUG';
-    public static $aws_access_api_rg = 'sa-east-1';
-    public static $aws_bucket_s3_name = 'sl-main-bucket';
+    public static $aws_access_key_id = '';
+    public static $aws_access_key_sc = '';
+    public static $aws_access_api_rg = '';
+    public static $aws_bucket_s3_name = '';
 
-    public static $db_host = 'tonecore-devdb.c8ejtt44azpy.sa-east-1.rds.amazonaws.com';
-    public static $db_user = 'toneCoreAdmin';
-    public static $db_pass = 'G6FQF6XYDWQJ66NW65L7R5JYSVKXFN63';
-    public static $db_port = '3306';
-    public static $db_base = 'sticklib';
-    //ssh -i '/Users/erosneto/Documents/sp-toneCoreDevKey.pem' ubuntu@18.228.226.52
+    public static $db_host = '';
+    public static $db_user = '';
+    public static $db_pass = '';
+    public static $db_port = '';
+    public static $db_base = '';
 }
